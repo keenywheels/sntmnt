@@ -1,0 +1,8 @@
+services:
+  analyzer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: analyzer
+    ports:
+      - 8000:8000
