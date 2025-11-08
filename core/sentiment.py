@@ -14,8 +14,7 @@ class SentimentAnalyzer:
         try:
             self.pipe = pipeline(
                 model=model_name,
-                top_k=None,
-                function_to_apply="softmax"
+                top_k=None
             )
             logger.info("Модель успешно загружена")
         except Exception as e:
