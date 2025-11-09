@@ -1,18 +1,35 @@
+from contextlib import asynccontextmanager
+
 from fastapi import Depends, FastAPI
 
-from app.dependencies import get_sentiment_analyzer
 from core.sentiment import SentimentAnalyzer
 from models.schemas import HealthResponse, SentimentResponse, TextRequest
+
+sentiment_analyzer = None
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global sentiment_analyzer
+    sentiment_analyzer = SentimentAnalyzer()
+    yield
+    sentiment_analyzer = None
+
 
 app = FastAPI(
     title="Sentiment Analysis API",
     version="1.0.0",
     description="API для анализа тональности русского текста",
+    lifespan=lifespan,
 )
 
 
+def get_sentiment_analyzer():
+    return sentiment_analyzer
+
+
 @app.post("/analyze-sentiment", response_model=SentimentResponse)
-def analyze_sentiment(
+async def analyze_sentiment(
     request: TextRequest, analyzer: SentimentAnalyzer = Depends(get_sentiment_analyzer)
 ):
     """
