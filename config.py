@@ -7,11 +7,9 @@ class Settings(BaseSettings):
     # Настройки сервера
     HOST: str = "0.0.0.0"
     PORT: int = 9999
-    WORKERS: int = 1
-    RELOAD: bool = False
 
     # Настройки модели
-    MODEL_NAME: str = "seara/rubert-tiny2-russian-sentiment"
+    MODEL_NAME_OR_PATH: str = "seara/rubert-tiny2-russian-sentiment"
 
     # Настройки логирования
     LOG_LEVEL: str = "INFO"

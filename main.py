@@ -1,5 +1,5 @@
 import uvicorn
-from app.api import app
+from analyzer.app.api import app
 from config import settings
 
 if __name__ == "__main__":
@@ -7,7 +7,7 @@ if __name__ == "__main__":
         "main:app",
         host=settings.HOST,
         port=settings.PORT,
-        reload=settings.RELOAD,
-        workers=settings.WORKERS,
+        reload=False,
+        workers=1,
         log_level=settings.LOG_LEVEL.lower()
     )

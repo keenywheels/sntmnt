@@ -9,4 +9,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+RUN apt-get update && apt-get install -y git git-lfs
+RUN git lfs install && git clone https://huggingface.co/seara/rubert-tiny2-russian-sentiment
+
 CMD ["python", "main.py"]

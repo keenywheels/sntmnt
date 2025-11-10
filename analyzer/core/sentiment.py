@@ -1,18 +1,18 @@
 import logging
 from transformers import pipeline
-from typing import Dict, Any
 from config import settings
 
 logger = logging.getLogger(__name__)
 
 class SentimentAnalyzer:
-    def __init__(self, model_name: str = settings.MODEL_NAME):
+    def __init__(self, model_name: str = settings.MODEL_NAME_OR_PATH):
         """
         Инициализация пайплайна для анализа тональности
         """
         logger.info(f"Инициализация модели: {model_name}")
         try:
             self.pipe = pipeline(
+                task="sentiment-analysis",
                 model=model_name,
                 top_k=None
             )
